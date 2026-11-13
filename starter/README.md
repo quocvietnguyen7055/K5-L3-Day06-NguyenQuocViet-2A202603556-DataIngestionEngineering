@@ -1,65 +1,47 @@
-# Starter · PostgreSQL + pgvector
+# Pipeline nạp dữ liệu — Day 06
 
-Bộ khởi động **tùy chọn** cho lab cá nhân. Docker Compose tạo PostgreSQL + pgvector local; các file trong `src/` là **khung pseudocode có TODO**, chưa đọc tài liệu, tạo embedding, lưu vector hay chạy benchmark. Bạn cần tự hiện thực. Vẫn có thể chọn Qdrant, Chroma hoặc vector store tương đương theo [GUIDE.md](../GUIDE.md).
+Pipeline hỗ trợ PostgreSQL + pgvector hoặc Chroma lưu bền vững tại máy:
 
-## Cấu trúc
+- **A:** cửa sổ cố định 500 ký tự, chồng lấn 50 ký tự.
+- **B:** gom các dòng/đoạn PDF theo cấu trúc, tối đa 500 ký tự.
+- **C:** dùng cùng cách chia như B; chỉ áp dụng filter metadata khi câu hỏi nêu phạm vi.
 
-```text
-starter/
-├── docker-compose.yml     # PostgreSQL 16 + pgvector, chỉ mở cổng local
-├── init.sql               # bật extension khi tạo database mới
-├── requirements.txt       # psycopg, pypdf và python-dotenv
-├── .env.example           # cấu hình mẫu; copy thành .env
-├── scripts/check_setup.py # kiểm tra kết nối và extension (đã chạy được)
-├── src/
-│   ├── models.py          # cấu trúc dữ liệu mẫu
-│   ├── ingestion.py       # TODO: đọc / chuẩn hóa tài liệu
-│   ├── chunking.py        # TODO: chia chunk
-│   ├── embeddings.py      # TODO: chọn model API hoặc local
-│   ├── store.py           # TODO: lưu vector, metadata và filter
-│   ├── evaluation.py      # TODO: chấm truy xuất, lưu trace
-│   └── run.py             # TODO: kết nối các bước thành pipeline
-├── data/                  # bạn tự chuẩn bị corpus được phép sử dụng
-└── results/               # lưu kết quả của bạn
-```
+Cả ba chiến lược dùng cùng corpus, benchmark, model embedding thật và cosine distance. Lỗi từ model/provider sẽ dừng pipeline; không có vector giả.
 
-## 1. Cài và kiểm tra database
+## Cài đặt và chạy
 
-Cần Docker Desktop hoặc Docker Engine + Compose, Python **3.11–3.14**, và mạng để tải image/dependencies lần đầu. Các lệnh sau chạy từ thư mục `starter/`:
+Từ thư mục `starter/`, tạo môi trường Python 3.11+, cài thư viện và sao chép `.env.example` thành `.env`. Cấu hình mẫu dùng model `sentence-transformers/all-MiniLM-L6-v2` và Chroma lưu cục bộ, không cần API key hoặc Docker. Nếu model chưa có trong bộ nhớ đệm, cần tải model một lần.
 
-```bash
-cd starter
-python3 -m venv .venv
-```
-
-Kích hoạt `.venv`: macOS/Linux dùng `source .venv/bin/activate`; Windows PowerShell dùng `.venv\Scripts\Activate.ps1`. Sau đó:
-
-```bash
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
-# macOS/Linux: cp .env.example .env
-# Windows PowerShell: Copy-Item .env.example .env
-docker compose -p day6_student_starter up -d --wait
-python scripts/check_setup.py
+Copy-Item .env.example .env
+python scripts/prepare_nist_corpus.py
+python -m src.run
 ```
 
-Kỳ vọng: hiện tên database, phiên bản PostgreSQL và pgvector, sau đó `Setup OK`. Đây **chỉ là kiểm tra hạ tầng**, không phải kết quả benchmark. Docker dùng cổng `127.0.0.1:55433` và mật khẩu cố định **chỉ dùng local cho lab**; nếu cổng bận, sửa đồng thời port trong `docker-compose.yml` và `DATABASE_URL` trong `.env`. `init.sql` chỉ chạy khi volume mới được tạo; nếu database sẵn có chưa bật extension, xem log Docker và kiểm tra cấu hình thay vì xóa volume chứa dữ liệu.
+Để dùng API embedding, đặt `EMBEDDING_PROVIDER=api`, tên model, endpoint và khóa API trong `.env`. Để dùng PostgreSQL, đặt `VECTOR_STORE=pgvector`, cấu hình `DATABASE_URL` và khởi động database bằng Docker Compose. `python scripts/check_setup.py` chỉ kiểm tra kết nối PostgreSQL, không chạy benchmark. Không commit `.env`.
 
-Dừng container nhưng giữ dữ liệu:
+## Corpus và quyền sử dụng
 
-```bash
-docker compose -p day6_student_starter stop
+Corpus là NIST SP 800-61r3, tải từ trang ấn phẩm chính thức của NIST bằng `scripts/prepare_nist_corpus.py`. Tài liệu nêu rằng tổ chức phi chính phủ có thể sử dụng tự nguyện và tài liệu không thuộc bản quyền tại Hoa Kỳ; manifest ghi thông tin trích dẫn và ngày truy cập. Script trích xuất PDF, chỉ tính trang có ít nhất 1.500 ký tự, bỏ bìa/front matter, trang tài liệu tham khảo và trang quá ngắn; đồng thời gắn metadata section/revision. Script tạo `data/manifest.json` và `data/pages.jsonl`. Chạy lại script để tái tạo dữ liệu. Hình ảnh bị lược bỏ; bố cục bảng có thể không được giữ nguyên khi dùng pypdf.
+
+Nếu Python không tải được PDF do lỗi chứng chỉ/mạng, tải PDF từ trang NIST chính thức vào `data/NIST.SP.800-61r3.pdf`, rồi chạy lại script để trích xuất.
+
+`benchmark/questions.jsonl` có 20 câu tiếng Việt cùng đáp án, chia 15 dev/5 test; 6 câu nêu filter chapter, gồm 2 câu test. Khi truy xuất, runner dùng bản dịch câu hỏi tiếng Anh tương ứng vì corpus và model embedding là tiếng Anh; nội dung benchmark và báo cáo vẫn bằng tiếng Việt. Trích dẫn evidence giữ nguyên tiếng Anh để đối chiếu chính xác với nguồn NIST. Script xác minh trích dẫn xuất hiện trong corpus và gán số trang PDF trước khi chạy. Không điều chỉnh cấu hình dựa trên test. Các câu không có filter sẽ chạy C mà không lọc.
+
+## Chạy và đầu ra
+
+```powershell
+python -m src.run
 ```
 
-## 2. Chọn embedding model
+Runner kiểm tra số lượng/field đầu vào, embedding các chunk, thay thế snapshot từng chiến lược trong vector store, truy xuất top-3 cho mỗi câu hỏi và tạo:
 
-Điền key tương ứng trong `.env` nếu dùng OpenRouter, OpenAI hoặc Gemini; **không commit `.env`**. Model local không cần API key. `requirements.txt` chỉ có dependencies cơ bản: tự cài SDK hoặc thư viện local phù hợp với model bạn chọn và ghi lại version/lệnh cài trong báo cáo. Ghi tên model và số chiều; dùng cùng model cho toàn bộ chiến lược và vector query tương thích vector document.
+- `results/retrieval_traces.json`: câu hỏi, gold evidence, top-k chunk, text/metadata/score và cờ hit.
+- `results/metrics.json`: Hit@1 và Evidence Hit@3 theo chiến lược và split, dạng số hit/tổng câu.
+- `results/run_metadata.json`: model, số chiều, số chunk, thời gian, cấu hình và chi phí.
+- `results/*_audit.csv`: đánh giá chunk coherence, metadata và grounding.
 
-## 3. Hoàn thiện pipeline
-
-1. Đặt corpus vào `data/` hoặc cung cấp manifest/hướng dẫn truy cập. Đọc [GUIDE.md](../GUIDE.md) về **30 trang nội dung**, quyền dữ liệu và metadata.
-2. Hoàn thiện từng hàm TODO trong `src/`. Lưu ID tài liệu, nguồn, trang/vị trí và ít nhất một trường filter có ích.
-3. Xây ít nhất ba cấu hình; ví dụ A fixed-size, B theo đoạn, C như B nhưng có filter. Cần cùng corpus, model và benchmark; nạp lại không nhân đôi và xử lý chunk cũ khi dữ liệu đổi.
-4. Tự viết ít nhất 20 câu hỏi kèm evidence, tách dev/test trước khi thử theo [BENCHMARK.md](../BENCHMARK.md). Lưu trace top-3 và báo cáo đủ năm tiêu chí.
-5. Sau khi hoàn thiện, chạy `python -m src.run` từ thư mục `starter/`. Trước khi làm TODO, lệnh này **chủ động báo `NotImplementedError`**.
-
-Lưu code, cấu hình, kết quả và lệnh chạy để người chấm tái lập; không commit key, dữ liệu mật hoặc dữ liệu không có quyền chia sẻ.
+Hit tự động chỉ xác nhận evidence được trích dẫn có mặt trong chunk cùng trang gold; không thay thế đánh giá thủ công. Phần audit hiện có nhãn AI hỗ trợ, cần người học xem xét và tự giải thích. Chroma dùng chỉ mục HNSW lưu cục bộ; PostgreSQL xếp hạng cosine chính xác nếu không bật chỉ mục gần đúng.

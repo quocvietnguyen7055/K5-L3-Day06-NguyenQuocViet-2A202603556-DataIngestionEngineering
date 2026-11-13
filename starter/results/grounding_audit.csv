@@ -1,0 +1,16 @@
+chiến_lược,mã_câu_hỏi,điểm_0_2,lý_do,người_đánh_giá
+A,q16,0,Top three results are summary passages and contain none of the requested inventory evidence,Codex đánh giá có AI hỗ trợ, một người chấm
+A,q17,1,Top three discuss asset management and prioritization generally but omit the requested four factors,Codex đánh giá có AI hỗ trợ, một người chấm
+A,q18,2,Top result contains the false-positive and false-negative recommendation with source page,Codex đánh giá có AI hỗ trợ, một người chấm
+A,q19,1,Results contain most network-monitoring scope but the top chunk begins mid-list and omits wired/wireless wording,Codex đánh giá có AI hỗ trợ, một người chấm
+A,q20,0,Top three are profile-introduction pages and do not provide incident-analysis evidence,Codex đánh giá có AI hỗ trợ, một người chấm
+B,q16,0,Top three results are summary passages and contain none of the requested inventory evidence,Codex đánh giá có AI hỗ trợ, một người chấm
+B,q17,2,Third result contains the asset-priority factors and supporting recommendation on the cited source page,Codex đánh giá có AI hỗ trợ, một người chấm
+B,q18,2,Second result contains the false-positive and false-negative recommendation with source page,Codex đánh giá có AI hỗ trợ, một người chấm
+B,q19,1,Results contain most network-monitoring scope but the top chunk begins mid-list and omits wired/wireless wording,Codex đánh giá có AI hỗ trợ, một người chấm
+B,q20,0,Top three are profile-introduction pages and do not provide incident-analysis evidence,Codex đánh giá có AI hỗ trợ, một người chấm
+C,q16,0,Top three results are summary passages and contain none of the requested inventory evidence,Codex đánh giá có AI hỗ trợ, một người chấm
+C,q17,2,Third result contains the asset-priority factors and supporting recommendation on the cited source page,Codex đánh giá có AI hỗ trợ, một người chấm
+C,q18,2,Second result contains the false-positive and false-negative recommendation with source page; chapter filter complied,Codex đánh giá có AI hỗ trợ, một người chấm
+C,q19,1,Results contain most network-monitoring scope but the top chunk begins mid-list and omits wired/wireless wording,Codex đánh giá có AI hỗ trợ, một người chấm
+C,q20,0,Chapter filter returns chapter 3 but top three remain introductory pages and miss the incident-analysis section,Codex đánh giá có AI hỗ trợ, một người chấm

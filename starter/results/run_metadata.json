@@ -1,0 +1,55 @@
+{
+  "source_id": "nist-sp-800-61r3",
+  "content_units": 35,
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "embedding_dimensions": 384,
+  "vector_store": "Chroma PersistentClient",
+  "distance": "cosine",
+  "strategies": {
+    "A": [
+      "fixed_size",
+      500,
+      50
+    ],
+    "B": [
+      "paragraph",
+      500,
+      0
+    ],
+    "C": [
+      "paragraph",
+      500,
+      0
+    ]
+  },
+  "chunk_counts": {
+    "A": 209,
+    "B": 202,
+    "C": 202
+  },
+  "ingestion_seconds_all_strategies": 37.011,
+  "ingestion_seconds_by_strategy": {
+    "A": 6.28,
+    "B": 2.743,
+    "C": 2.21
+  },
+  "chunking_seconds_by_strategy": {
+    "A": 0.008,
+    "B": 0.019,
+    "C": 0.017
+  },
+  "embedding_seconds_by_strategy": {
+    "A": 5.175,
+    "B": 1.795,
+    "C": 1.711
+  },
+  "index_write_seconds_by_strategy": {
+    "A": 1.097,
+    "B": 0.929,
+    "C": 0.482
+  },
+  "vector_store_setup_seconds": 25.778,
+  "query_and_evaluation_seconds": 1.076,
+  "estimated_cost_usd": "0 (embedding cục bộ; chưa tính điện năng máy)",
+  "note": "Chiến lược C chỉ khác B ở việc áp dụng bộ lọc metadata được cung cấp cho câu hỏi."
+}

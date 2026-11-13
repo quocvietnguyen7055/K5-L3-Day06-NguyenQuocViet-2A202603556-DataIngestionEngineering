@@ -1,0 +1,4 @@
+chiến_lược,số_bản_ghi_top3_test,metadata_nguồn_trang_đúng_đủ,số_câu_test_có_lọc,số_kết_quả_có_lọc,số_kết_quả_đúng_lọc,ghi_chú
+A,15,15/15,0,N/A,N/A,Every returned source and page is traceable; A intentionally applies no filter
+B,15,15/15,0,N/A,N/A,Every returned source and page is traceable; B intentionally applies no filter
+C,15,15/15,2,6,6/6,All returned records for filtered test questions match chapter=3; no test query filters more narrowly than chapter

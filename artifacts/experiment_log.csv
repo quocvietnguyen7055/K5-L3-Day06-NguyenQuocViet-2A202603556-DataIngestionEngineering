@@ -1,4 +1,4 @@
-strategy,chunking,chunk_size,overlap,metadata,filter,vectorizer,hypothesis,dev_hit1,dev_hit3,test_hit1,test_hit3,notes
-A,,,,,,,,,,,,
-B,,,,,,,,,,,,
-C,,,,,,,,,,,,
+chiến_lược,chia_chunk,kích_thước_chunk,overlap,metadata,bộ_lọc,mô_hình_embedding,giả_thuyết,dev_hit1,dev_hit3,test_hit1,test_hit3,ghi_chú
+A,cửa_sổ_cố_định,500_ký_tự,50_ký_tự,source/trang và metadata nguồn,không,sentence-transformers/all-MiniLM-L6-v2 384 chiều local,"Cửa sổ cố định tạo ngữ cảnh ổn định; phần chồng lấn có thể giữ bằng chứng qua ranh giới đoạn.",2/15,5/15,0/5,1/5,"Đã chạy; 209 đoạn; thời gian nạp 3.120 giây; chi phí API 0 USD."
+B,theo_dòng_đoạn,500_ký_tự,0,source/trang và metadata nguồn,không,sentence-transformers/all-MiniLM-L6-v2 384 chiều local,"Ranh giới theo cấu trúc có thể cải thiện tính mạch lạc so với cửa sổ cố định.",5/15,6/15,0/5,1/5,"Đã chạy; 202 đoạn; thời gian nạp 2.145 giây; chi phí API 0 USD."
+C,theo_dòng_đoạn,500_ký_tự,0,source/trang và metadata nguồn,chỉ lọc chương theo câu hỏi,sentence-transformers/all-MiniLM-L6-v2 384 chiều local,"Bộ lọc có thể cải thiện truy xuất cho câu hỏi có phạm vi rõ; B và C chỉ khác bộ lọc.",5/15,7/15,0/5,1/5,"Đã chạy; 202 đoạn; thời gian nạp 2.625 giây; chi phí API 0 USD."

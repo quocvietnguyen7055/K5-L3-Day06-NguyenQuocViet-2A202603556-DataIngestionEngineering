@@ -1,0 +1,21 @@
+{
+  "source_id": "nist-sp-800-61r3",
+  "title": "Incident Response Recommendations and Considerations for Cybersecurity Risk Management: A CSF 2.0 Community Profile",
+  "authors": [
+    "Alex Nelson",
+    "Sanjay Rekhi",
+    "Murugiah Souppaya",
+    "Karen Scarfone"
+  ],
+  "publisher": "National Institute of Standards and Technology, U.S. Department of Commerce",
+  "source_path_or_url": "https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r3.pdf",
+  "doi": "10.6028/NIST.SP.800-61r3",
+  "license_or_permission": "NIST SP 800-61r3 nêu rằng tổ chức phi chính phủ có thể sử dụng tự nguyện và tài liệu không thuộc bản quyền tại Hoa Kỳ; NIST khuyến khích trích dẫn nguồn. Cần kiểm tra riêng quyền của tài liệu bên thứ ba; bản trích xuất này không gồm hình ảnh.",
+  "attribution": "Nelson, A., Rekhi, S., Souppaya, M., & Scarfone, K. (2025). NIST SP 800-61r3. https://doi.org/10.6028/NIST.SP.800-61r3",
+  "accessed_at": "2026-11-13",
+  "content_unit_rule": "Một trang PDF vật lý có nội dung, ít nhất 1.500 ký tự sau khi bỏ dòng trống; loại bìa/front matter, references (trang PDF vật lý 44-45) và trang ngắn. page là số trang PDF vật lý; giữ phần bảng thuật ngữ.",
+  "pages_counted": 35,
+  "pdf_physical_pages": 48,
+  "excluded_short_pages": 13,
+  "copyright_note": "Tại trang in số 2, tài liệu nêu tổ chức phi chính phủ có thể sử dụng tự nguyện và tài liệu không thuộc bản quyền tại Hoa Kỳ."
+}

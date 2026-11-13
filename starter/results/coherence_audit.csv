@@ -1,0 +1,31 @@
+chiến_lược,trang_PDF,điểm_0_2,lý_do,người_đánh_giá
+A,9,1,Opening summary chunk ends partway through a bullet and loses its completion,Codex đánh giá có AI hỗ trợ, một người chấm
+A,10,1,Event definition and examples are clear but the final sentence is cut at the chunk boundary,Codex đánh giá có AI hỗ trợ, một người chấm
+A,11,1,Chunk combines a carried-over paragraph with a new subsection and cuts the final word,Codex đánh giá có AI hỗ trợ, một người chấm
+A,12,1,Section overview is understandable but the final list item is truncated,Codex đánh giá có AI hỗ trợ, một người chấm
+A,13,1,Function list begins clearly but the chunk cuts the first outcome mid-list,Codex đánh giá có AI hỗ trợ, một người chấm
+A,14,1,Table context is present but the phase mapping is interrupted at the boundary,Codex đánh giá có AI hỗ trợ, một người chấm
+A,15,2,Leadership responsibility is understandable and supported by complete examples,Codex đánh giá có AI hỗ trợ, một người chấm
+A,16,1,HR and physical-security bullets run together and the latter is cut,Codex đánh giá có AI hỗ trợ, một người chấm
+A,17,1,Policy-element list is recognizable but the final item is cut,Codex đánh giá có AI hỗ trợ, một người chấm
+A,18,1,Profile definition is understandable but the paragraph continues beyond the chunk,Codex đánh giá có AI hỗ trợ, một người chấm
+B,9,1,Opening summary chunk ends partway through a bullet and loses its completion,Codex đánh giá có AI hỗ trợ, một người chấm
+B,10,1,Event definition and examples are clear but the final sentence is cut at the chunk boundary,Codex đánh giá có AI hỗ trợ, một người chấm
+B,11,1,Chunk combines a carried-over paragraph with a new subsection and cuts the final word,Codex đánh giá có AI hỗ trợ, một người chấm
+B,12,1,Section overview is understandable but the final list item is truncated,Codex đánh giá có AI hỗ trợ, một người chấm
+B,13,2,Complete Govern outcome is coherent as a standalone item,Codex đánh giá có AI hỗ trợ, một người chấm
+B,14,1,Table context is present but the phase mapping is interrupted at the boundary,Codex đánh giá có AI hỗ trợ, một người chấm
+B,15,2,Leadership responsibility is understandable and supported by complete examples,Codex đánh giá có AI hỗ trợ, một người chấm
+B,16,2,HR bullet remains complete and self-contained within the chunk,Codex đánh giá có AI hỗ trợ, một người chấm
+B,17,1,Policy-element list is recognizable but lacks its lead-in and remaining items,Codex đánh giá có AI hỗ trợ, một người chấm
+B,18,1,Profile definition is understandable but the paragraph continues beyond the chunk,Codex đánh giá có AI hỗ trợ, một người chấm
+C,9,1,Opening summary chunk ends partway through a bullet and loses its completion,Codex đánh giá có AI hỗ trợ, một người chấm
+C,10,1,Event definition and examples are clear but the final sentence is cut at the chunk boundary,Codex đánh giá có AI hỗ trợ, một người chấm
+C,11,1,Chunk combines a carried-over paragraph with a new subsection and cuts the final word,Codex đánh giá có AI hỗ trợ, một người chấm
+C,12,1,Section overview is understandable but the final list item is truncated,Codex đánh giá có AI hỗ trợ, một người chấm
+C,13,2,Complete Govern outcome is coherent as a standalone item,Codex đánh giá có AI hỗ trợ, một người chấm
+C,14,1,Table context is present but the phase mapping is interrupted at the boundary,Codex đánh giá có AI hỗ trợ, một người chấm
+C,15,2,Leadership responsibility is understandable and supported by complete examples,Codex đánh giá có AI hỗ trợ, một người chấm
+C,16,2,HR bullet remains complete and self-contained within the chunk,Codex đánh giá có AI hỗ trợ, một người chấm
+C,17,1,Policy-element list is recognizable but lacks its lead-in and remaining items,Codex đánh giá có AI hỗ trợ, một người chấm
+C,18,1,Profile definition is understandable but the paragraph continues beyond the chunk,Codex đánh giá có AI hỗ trợ, một người chấm
